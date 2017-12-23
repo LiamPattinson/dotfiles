@@ -1,0 +1,38 @@
+# Collection of recommended first steps for an awesome Linux installation
+
+# ===========================================================================
+# Absolutely required (install as root)
+
+# essential cmd line tools
+sudo zsh vim git stow tmux tar make cmake openssh curl wget gcc gcc-fortran
+
+# create user account
+useradd -m -s /bin/bash liam
+passwd liam
+
+# add to sudoers
+visudo
+# find line containing 'root ALL=(ALL) ALL', add line 'liam ALL=(ALL) ALL'
+
+# ===========================================================================
+# Graphics
+
+# Enable x-graphics, provide startx command for firing it up
+# Note: may need extensions from xorgs-apps group
+xorg-server xorg-xinit xorg-xrdb
+
+# Intel graphics
+xf86-video-intell mesa
+# Or you're on a decent machine...
+nvidia nvidia-utils
+# Or perhaps some specific driver name
+
+# Minimum LXDE
+lxde-common lxsession
+echo "exec startlxde" > ~/.xinitrc
+
+# Simple window manager
+openbox
+
+# Terminal emulator
+rxvt-unicode

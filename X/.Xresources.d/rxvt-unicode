@@ -1,0 +1,49 @@
+!! rxvt-unicode settings
+
+!! Scroll settings
+URxvt.scrollBar: false
+URxvt.saveLines: 8192
+
+!! Solarized Colour Scheme
+
+#include "solarized_colors"
+
+!! misc
+URxvt.background: SolarizedBase03
+URxvt.foreground: SolarizedBase0
+URxvt.fadeColor:  SolarizedBase03
+URxvt.cursorColor: SolarizedBase1
+URxvt.pointerColorBackground: SolarizedBase01
+URxvt.pointerColorForeground: SolarizedBase1
+
+!! black
+URxvt.color0: SolarizedBase02
+URxvt.color8: SolarizedBase03
+
+!! red
+URxvt.color1: SolarizedRed
+URxvt.color9: SolarizedOrange
+
+!! green
+URxvt.color2: SolarizedGreen
+URxvt.color10: SolarizedBase01
+
+!! yellow
+URxvt.color3: SolarizedYellow
+URxvt.color11: SolarizedBase00
+
+!! blue
+URxvt.color4: SolarizedBlue
+URxvt.color12: SolarizedBase0
+
+!! magenta
+URxvt.color5: SolarizedMagenta
+URxvt.color13: SolarizedViolet
+
+!! cyan
+URxvt.color6: SolarizedCyan
+URxvt.color14: SolarizedBase1
+
+!! white
+URxvt.color7: SolarizedBase2
+URxvt.color15: SolarizedBase3
