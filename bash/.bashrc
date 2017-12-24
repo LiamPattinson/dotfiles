@@ -19,3 +19,7 @@ alias tmux='tmux -2'
 
 # SSH keychain
 eval $(keychain --eval --quiet --nogui --noask id_rsa)
+
+# Set lang
+LANG=en_GB.UTF-8
+LC_CTYPE=$LANG
