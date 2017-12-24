@@ -14,53 +14,34 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
-
 " ==================================================================
 " MY PLUGINS
 " ==================================================================
 
-" Solarized colors
+" solarized theme
 Plugin 'altercation/vim-colors-solarized'
 
-" vim-airline
+" vim-airline -- better status/tabline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 " obsession -- auto session saving
 Plugin 'tpope/vim-obsession'
 
-" tmux line
+" tmux line -- better tmux integration
 Plugin 'edkolev/tmuxline.vim'
 
-" fugitive (fancy Git plugin)
+" fugitive -- fancy Git plugin
 Plugin 'tpope/vim-fugitive'
 
-" gitgutter
+" gitgutter -- show git changes on left-hand side
 Plugin 'airblade/vim-gitgutter'
 
-" vim-LaTeX
+" vim-latex -- features to improve LaTeX editing experience
 Plugin 'vim-latex/vim-latex'
 
-" Rust syntax highlighting
+" rust syntax highlighting
 Plugin 'rust-lang/rust.vim'
-
-" Python autocomplete
-"Plugin 'davidhalter/jedi-vim'
 
 " ==================================================================
 
@@ -81,8 +62,8 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 " ==================================================================
-
-" Personal setup
+" PERSONAL SETUP
+" ==================================================================
 
 " Statusbar commands. Allows coloured status.
 set laststatus=2
@@ -106,10 +87,8 @@ set background=dark
 colorscheme solarized
 let g:solarized_termcolors=256
 
-
 " LaTeX Settings
-"helptags ~/.vim/bundle/vim-latex/doc
 let g:tex_flavor = "latex"
 au BufRead *.tex setlocal tw=79
-"au BufRead *.tex setlocal wrap linebreak nolist
 au BufRead *.tex setlocal spell spelllang=en_gb
+helptags ~/.vim/bundle/vim-latex/doc

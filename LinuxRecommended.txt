@@ -39,6 +39,14 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
 # Fix this re-stowing zsh dotfiles
 
 # ===========================================================================
+# Upgrade vim
+
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
+
+# Remember to stow your .vimrc!
+
+# ===========================================================================
 # Graphics
 
 # Enable x-graphics, provide startx command for firing it up
