@@ -9,7 +9,7 @@ openssh keychain curl wget
 make cmake gcc gcc-fortran
 
 # create user account
-useradd -m -s /bin/bash liam
+useradd -m -s /bin/zsh liam
 passwd liam
 # add to sudoers with visudo
 # find line containing 'root ALL=(ALL) ALL', add line 'liam ALL=(ALL) ALL'
@@ -20,6 +20,23 @@ passwd liam
 # Generate SSH key pair
 ssh-keygen
 
+# Be sure to log in to GitHub and add the id_rsa.pub. You may have to do this
+# using a different device with a more complete OS. 
+
+# ===========================================================================
+# Get dotfiles
+
+git clone git@github.com:LiamPattinson/dotfiles.git
+
+# Enter dir, stow any desired packages. Save X until after graphics install.
+
+# ===========================================================================
+# Upgrade zsh
+
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+# Install will, quite rudely, push your .zshrc to .zshrc.pre-oh-my-zsh
+# Fix this re-stowing zsh dotfiles
 
 # ===========================================================================
 # Graphics
