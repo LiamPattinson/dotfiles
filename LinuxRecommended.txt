@@ -4,15 +4,22 @@
 # Absolutely required (install as root)
 
 # essential cmd line tools
-sudo zsh vim git stow tmux tar make cmake openssh curl wget gcc gcc-fortran
+sudo zsh vim git stow tmux tar
+openssh keychain curl wget
+make cmake gcc gcc-fortran
 
 # create user account
 useradd -m -s /bin/bash liam
 passwd liam
-
-# add to sudoers
-visudo
+# add to sudoers with visudo
 # find line containing 'root ALL=(ALL) ALL', add line 'liam ALL=(ALL) ALL'
+
+# ===========================================================================
+# Set up SSH credentials
+
+# Generate SSH key pair
+ssh-keygen
+
 
 # ===========================================================================
 # Graphics
@@ -29,7 +36,6 @@ nvidia nvidia-utils
 
 # Minimum LXDE
 lxde-common lxsession
-echo "exec startlxde" > ~/.xinitrc
 
 # Simple window manager
 openbox
