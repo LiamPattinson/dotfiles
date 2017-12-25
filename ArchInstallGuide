@@ -1,12 +1,17 @@
 # Collection of recommended first steps for an awesome Linux installation
 
 # ===========================================================================
+# Install according to the excellent resourced at the Arch wiki. This should
+# include partitioning, installing Arch base, installing networking tools,
+# and setting up GRUB.
+
+# ===========================================================================
 # Absolutely required (install as root)
 
 # essential cmd line tools
 sudo zsh vim git stow tmux tar
 openssh keychain curl wget
-make cmake gcc gcc-fortran
+make cmake gcc gcc-fortran python
 
 # create user account
 useradd -m -s /bin/zsh liam
@@ -20,26 +25,29 @@ passwd liam
 # Generate SSH key pair
 ssh-keygen
 
-# Be sure to log in to GitHub and add the id_rsa.pub. You may have to do this
-# using a different device with a more complete OS. 
+# Be sure to log in to GitHub and add ~/.ssh/id_rsa.pub. You may have to do
+# this using a different device with a functioning web browser.
 
 # ===========================================================================
 # Get dotfiles
 
 git clone git@github.com:LiamPattinson/dotfiles.git
 
-# Enter dir, stow any desired packages. Save X until after graphics install.
+# Enter dir, stow any desired packages.
+# Be sure that your $HOME directory has the required directory structure
+# being stowing -- if it doesn't, it'll create symlink directories to the
+# ~/dotfiles dir, which will cause all kinds of problems.
 
 # ===========================================================================
-# Upgrade zsh
+# Upgrade zsh, oh-my-zsh
 
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
-# Install will, quite rudely, push your .zshrc to .zshrc.pre-oh-my-zsh
-# Fix this re-stowing zsh dotfiles
+# This will, quite rudely, push your .zshrc to .zshrc.pre-oh-my-zsh.
+# Fix this by calling `stow zsh` from ~/dotfiles.
 
 # ===========================================================================
-# Upgrade vim
+# Upgrade vim, vundle
 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
@@ -49,7 +57,7 @@ vim +PluginInstall +qall
 # ===========================================================================
 # Graphics
 
-# Enable x-graphics, provide startx command for firing it up
+# Enable x-graphics, provide startx command for firing it up.
 # Note: may need extensions from xorgs-apps group
 xorg-server xorg-xinit xorg-xrdb
 
@@ -74,5 +82,18 @@ rxvt-unicode
 # Add support for true-type fonts
 libx11 libxft
 
-# pacman at least one of the following:
-ttf-roboto ttf-liberation ttf-hack ttf-droid
+# Dowmload the following fonts at a minimum.
+ttf-roboto ttf-hack
+
+# ===========================================================================
+# Openbox config
+
+# Install the following
+openbox-themes menumaker xterm
+
+# Stow openbox from ~/dotfiles, and call the following:
+mmaker -v OpenBox3
+
+# The resulting menu will require significant changes.
+
+
