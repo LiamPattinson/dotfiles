@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openbox_menu>
     <menu id="root-menu" label="OpenBox 3">
+        <menu id="1" label="Files">
+            <item label="Midnight Commander"> <action name="Execute">
+                <execute>urxvt -e mc</execute>
+            </action> </item>
+        </menu>
+        <separator/>
         <menu id="1" label="Development">
             <item label="Python"> <action name="Execute">
                 <execute>urxvt -e python</execute>

@@ -92,3 +92,10 @@ ttf-roboto ttf-hack
 openbox-themes
 
 # OpenBox menu will require manual edits for any new software.
+
+# ===========================================================================
+# File Manager
+
+# Download midnight commander
+mc
+
