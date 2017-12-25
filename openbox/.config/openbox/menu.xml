@@ -2,9 +2,6 @@
 <openbox_menu>
     <menu id="root-menu" label="OpenBox 3">
         <menu id="1" label="Development">
-            <item label="IDLE (Python IDE)"> <action name="Execute">
-                <execute>idle</execute>
-            </action> </item>
             <item label="Python"> <action name="Execute">
                 <execute>urxvt -e python</execute>
             </action> </item>

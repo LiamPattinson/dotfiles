@@ -11,7 +11,7 @@
 # essential cmd line tools
 sudo zsh vim git stow tmux tar
 openssh keychain curl wget
-make cmake gcc gcc-fortran python
+make cmake gcc gcc-fortran
 
 # create user account
 useradd -m -s /bin/zsh liam
@@ -89,11 +89,6 @@ ttf-roboto ttf-hack
 # Openbox config
 
 # Install the following
-openbox-themes menumaker xterm
+openbox-themes
 
-# Stow openbox from ~/dotfiles, and call the following:
-mmaker -v OpenBox3
-
-# The resulting menu will require significant changes.
-
-
+# OpenBox menu will require manual edits for any new software.
