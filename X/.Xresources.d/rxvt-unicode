@@ -1,9 +1,12 @@
 !! rxvt-unicode settings
 
+!! ========================================================
 !! Scroll settings
+
 URxvt.scrollBar: false
 URxvt.saveLines: 8192
 
+!! ========================================================
 !! Solarized Colour Scheme
 
 #include "solarized_colors"
@@ -47,3 +50,10 @@ URxvt.color14: SolarizedBase1
 !! white
 URxvt.color7: SolarizedBase2
 URxvt.color15: SolarizedBase3
+
+!! ========================================================
+!! Font
+
+URxvt.font: xft:Hack:style=Regular:pixelsize=10
+URxvt.boldFont: xft:Hack:style=Bold:pixelsize=10
+URxvt.letterSpace: -1

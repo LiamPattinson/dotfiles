@@ -67,3 +67,12 @@ openbox
 
 # Terminal emulator
 rxvt-unicode
+
+# ===========================================================================
+# Fonts
+
+# Add support for true-type fonts
+libx11 libxft
+
+# pacman at least one of the following:
+ttf-roboto ttf-liberation ttf-hack ttf-droid

@@ -29,9 +29,12 @@ if [[ -d $HOME/.oh-my-zsh ]]; then
     # Path to your oh-my-zsh installation.
     export ZSH=$HOME/.oh-my-zsh
 
+    # Prevent automatic window renaming
+    DISABLE_AUTO_TITLE="true"
+
     # Theme
     prompt default
-    ZSH_THEME="robbyrussell"
+    ZSH_THEME="agnoster"
 
     # Command auto-correction
     ENABLE_CORRECTION="true"
