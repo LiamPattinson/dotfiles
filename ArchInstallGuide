@@ -11,13 +11,26 @@
 # essential cmd line tools
 sudo zsh vim git stow tmux tar
 openssh keychain curl wget
+
+# essential development tools
 make cmake gcc gcc-fortran
+python2 python3 python-pip
 
 # create user account
 useradd -m -s /bin/zsh liam
 passwd liam
 # add to sudoers with visudo
 # find line containing 'root ALL=(ALL) ALL', add line 'liam ALL=(ALL) ALL'
+
+# ===========================================================================
+# Network configuration
+
+# Set up a new netctl profile. This should be copied from:
+/etc/netctl/examples
+
+# wpa_config should work for any wireless networks. From here:
+netctl start my_profile
+netctl enable my_profile # automatically connect next reboot
 
 # ===========================================================================
 # Set up SSH credentials
@@ -55,6 +68,13 @@ vim +PluginInstall +qall
 # Remember to stow your .vimrc!
 
 # ===========================================================================
+# Upgrade tmux
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Run tmux, call Prefix+I
+
+# ===========================================================================
 # Graphics
 
 # Enable x-graphics, provide startx command for firing it up.
@@ -67,8 +87,12 @@ xf86-video-intell mesa
 nvidia nvidia-utils
 # Or perhaps some specific driver name
 
-# Minimum LXDE
+# Minimum LXDE:
 lxde-common lxsession
+
+# To edit appearance:
+lxappearance gtk-chtheme
+# Recommend theme 'weightless-industry', font Roboto light 7
 
 # Simple window manager
 openbox
@@ -76,14 +100,14 @@ openbox
 # Terminal emulator
 rxvt-unicode
 
-# ===========================================================================
-# Fonts
+# Desktop system diagnostics
+conky
 
-# Add support for true-type fonts
-libx11 libxft
+# Download the following fonts at a minimum.
+ttf-roboto ttf-hack ttf-droid
 
-# Dowmload the following fonts at a minimum.
-ttf-roboto ttf-hack
+# To enable Python IDLE
+tk
 
 # ===========================================================================
 # Openbox config
@@ -93,9 +117,35 @@ openbox-themes
 
 # OpenBox menu will require manual edits for any new software.
 
+# Lightweight image viewer / desktop background:
+feh
+
+# PDF viewer:
+apvlv
+
+# ===========================================================================
+# Sound
+
+alsa-utils
+
 # ===========================================================================
 # File Manager
 
-# Download midnight commander
+# Terminal-based: midnight commander
 mc
 
+# GUI: pcmanfm
+pcmanfm
+
+# ===========================================================================
+# Web-browsing / Email client
+
+# Any mainstream browser requires a shitload of dependencies, and will likely
+# bloat your install by around 0.5GB.
+firefox thunderbird
+
+# ===========================================================================
+# Multimedia
+
+# Video playback, DVD support
+vlc

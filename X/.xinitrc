@@ -27,7 +27,6 @@ fi
 
 setxkbmap -layout gb,de -option grp:ctrls_toggle,terminate:ctrl_alt_bksp
 
-
 # Read settings from Xresources
 
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
@@ -43,6 +42,4 @@ fi
 
 # Begin lxde session w/ openbox
 
-exec startlxde
 exec openbox-session
-
