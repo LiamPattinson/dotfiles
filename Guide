@@ -9,12 +9,17 @@
 # Absolutely required (install as root)
 
 # essential cmd line tools
-sudo zsh vim git stow tmux tar
+sudo zsh vim git stow tmux
 openssh keychain curl wget
 
 # essential development tools
-make cmake gcc gcc-fortran
+make cmake autoconf automake
+gcc gcc-fortran
 python2 python3 python-pip
+lua
+
+# misc utils from base-devel group
+bison fakeroot flex patch pkg-config
 
 # create user account
 useradd -m -s /bin/zsh liam
@@ -50,6 +55,10 @@ git clone git@github.com:LiamPattinson/dotfiles.git
 # Be sure that your $HOME directory has the required directory structure
 # being stowing -- if it doesn't, it'll create symlink directories to the
 # ~/dotfiles dir, which will cause all kinds of problems.
+
+# Make .bash_local in home directory
+# This should include, at a minimum:
+export WLAN=<wlan_driver>
 
 # ===========================================================================
 # Upgrade zsh, oh-my-zsh
@@ -100,9 +109,6 @@ openbox
 # Terminal emulator
 rxvt-unicode
 
-# Desktop system diagnostics
-conky
-
 # Download the following fonts at a minimum.
 ttf-roboto ttf-hack ttf-droid
 
@@ -119,9 +125,27 @@ openbox-themes
 
 # Lightweight image viewer / desktop background:
 feh
+feh --bg-center dotfiles/ArchBlueWall.jpg
+
+# Image manip:
+imagemagick
 
 # PDF viewer:
 apvlv
+
+# ===========================================================================
+# Conky
+# Desktop system diagnostics
+
+# For simple install:
+conky
+
+# For a more complex install, must use AUR resources
+# (Github version has issues with build system)
+cd ~/AUR
+git clone https://aur.archlinux.org/conky-lua.git
+cd conky-lua
+makepkg -sirc
 
 # ===========================================================================
 # Sound

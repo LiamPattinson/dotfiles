@@ -5,6 +5,11 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Load local settings
+if [[ -f $HOME/.bash_local ]]; then
+    source $HOME/.bash_local
+fi
+
 # Command prompt
 PS1='[\t \u@\h \w]\$ '
 
@@ -20,3 +25,7 @@ alias tmux='tmux -2'
 
 # SSH keychain
 eval $(keychain --eval --quiet --nogui --noask id_rsa)
+
+# Environment Variables
+COLOUR_BLUE_RGB="38,139,210"
+COLOUR_BLUE_HEX="268bd2"
