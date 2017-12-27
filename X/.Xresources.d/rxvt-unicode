@@ -5,7 +5,18 @@
 
 URxvt.scrollBar: false
 URxvt.saveLines: 8192
+URxvt.secondaryScreen: 1
+URxvt: secondaryScroll: 0
 
+!! ========================================================
+!! Perl extensions
+
+!! Clickable URLS
+
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: firefox
+URxvt.matcher.button: 1
+ 
 !! ========================================================
 !! Solarized Colour Scheme
 
