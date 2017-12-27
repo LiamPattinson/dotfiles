@@ -92,7 +92,7 @@ end
 -- Gauges
 
 function draw_gauge( cr, x, y, fill, radius)
-    ring_width=6
+    ring_width=8
     ring_start=rad(90)
     ring_end=rad(360)
     -- Background
@@ -153,11 +153,11 @@ function conky_main()
 
     -- Set up shapes
     hex_length=75
-    hex_width=1
+    hex_width=2
     gauge_radius=50
 
     -- Begin drawing
-    x,y=0,500
+    x,y=2,500
 
     -- Decorative hex
     draw_hex(cr,x,y,hex_length,hex_width)
