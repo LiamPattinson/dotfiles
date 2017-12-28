@@ -34,8 +34,8 @@ ck_r,ck_g,ck_b=0,0,0
 -- Hexagon Utilities
 
 -- Draw hexagon, given left-most point
-function draw_hex( cr, x, y, length, width)
-    cairo_set_source_rgb(cr,cb_r,cb_g,cb_b)
+function draw_hex_helper( cr, x, y, length, width, r, g, b, a)
+    cairo_set_source_rgba(cr,r,g,b,a)
     cairo_set_line_width(cr,width)
     cairo_move_to(cr,x,y)
     cairo_rel_line_to(cr, length*cos60, length*sin60)
@@ -46,6 +46,20 @@ function draw_hex( cr, x, y, length, width)
     cairo_rel_line_to(cr, -length*cos60, length*sin60)
     cairo_close_path(cr)
     cairo_stroke(cr)
+end
+function draw_hex( cr, x, y, length, width)
+    draw_hex_helper(cr,x,y,length,width,cb_r,cb_g,cb_b,1.0)
+    -- Add cheap blur
+    draw_hex_helper(cr,x,y,length,width+10,cb_r,cb_g,cb_b,0.02)
+    draw_hex_helper(cr,x,y,length,width+8,cb_r,cb_g,cb_b,0.05)
+    draw_hex_helper(cr,x,y,length,width+6,cb_r,cb_g,cb_b,0.07)
+    draw_hex_helper(cr,x,y,length,width+4,cb_r,cb_g,cb_b,0.1)
+    draw_hex_helper(cr,x,y,length,width+3,cb_r,cb_g,cb_b,0.2)
+    draw_hex_helper(cr,x,y,length,width+2,cb_r,cb_g,cb_b,0.3)
+    -- This solution will, unfortunately, result in thicker
+    -- lines in between hexagones than at the outer edges.
+    -- The effect is strongest where 3 hexes meet. Much simpler
+    -- than doing a real blur with cairo though...
 end
 
 -- Given left-most point on hexagon, get top right point
@@ -97,17 +111,36 @@ function draw_gauge( cr, x, y, fill, radius)
     ring_end=rad(360)
     -- Background
     cairo_set_line_width(cr,ring_width)
-    cairo_set_source_rgb(cr,cg_r,cg_g,cg_b)
+    cairo_set_source_rgba(cr,cw_r,cw_g,cw_b,0.6)
     cairo_arc(cr,x,y,radius,ring_start-0.02,ring_end+0.02)
     cairo_stroke(cr)
+    -- Cheap blur
+    cairo_set_line_width(cr,ring_width+2)
+    cairo_set_source_rgba(cr,cw_r,cw_g,cw_b,0.2)
+    cairo_arc(cr,x,y,radius,ring_start-0.04,ring_end+0.04)
+    cairo_stroke(cr)
+    cairo_set_line_width(cr,ring_width+4)
+    cairo_set_source_rgba(cr,cw_r,cw_g,cw_b,0.1)
+    cairo_arc(cr,x,y,radius,ring_start-0.04,ring_end+0.04)
+    cairo_stroke(cr)
     -- Black fill
-    cairo_set_line_width(cr,ring_width/2)
+    cairo_set_line_width(cr,ring_width-4)
     cairo_set_source_rgb(cr,ck_r,ck_g,ck_b)
     cairo_arc(cr,x,y,radius,ring_start,ring_end)
     cairo_stroke(cr)
     -- Blue meter
     meter_end=ring_start + (ring_end-ring_start)*fill
+    cairo_set_line_width(cr,ring_width-6)
     cairo_set_source_rgb(cr,cb_r,cb_g,cb_b)
+    cairo_arc(cr,x,y,radius,ring_start,meter_end)
+    cairo_stroke(cr)
+    -- Cheap blur
+    cairo_set_line_width(cr,ring_width-4)
+    cairo_set_source_rgba(cr,cb_r,cb_g,cb_b,0.5)
+    cairo_arc(cr,x,y,radius,ring_start,meter_end)
+    cairo_stroke(cr)
+    cairo_set_line_width(cr,ring_width-2)
+    cairo_set_source_rgba(cr,cb_r,cb_g,cb_b,0.3)
     cairo_arc(cr,x,y,radius,ring_start,meter_end)
     cairo_stroke(cr)
 end
@@ -142,6 +175,7 @@ function conky_main()
                                          conky_window.width,
                                          conky_window.height)
     cr = cairo_create(cs)
+    cairo_set_antialias(cr,CAIRO_ANTIALIAS_DEFAULT)
 
     -- Set up text output
     cairo_select_font_face( cr, font, font_slant, font_face)
@@ -152,12 +186,12 @@ function conky_main()
     wlan=os.getenv("WLAN")
 
     -- Set up shapes
-    hex_length=75
-    hex_width=2
+    hex_length=70
+    hex_width=1
     gauge_radius=50
 
     -- Begin drawing
-    x,y=2,500
+    x,y=10,500
 
     -- Decorative hex
     draw_hex(cr,x,y,hex_length,hex_width)
