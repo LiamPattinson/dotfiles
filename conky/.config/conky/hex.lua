@@ -284,9 +284,24 @@ function conky_main()
     write_text_centered(cr,x,y+15,conky_parse('${running_processes}'),extents)
     x,y=from_hex_c(x,y,hex_length)
 
-    -- Decorative hexes
+    -- Optional hex
     x,y=to_hex_tr(x,y,hex_length)
     draw_hex(cr,x,y,hex_length,hex_width)
+    if tonumber(conky_parse('${if_mounted /data}1${endif}')) then
+        fs=conky_parse('${fs_used /data}')
+        fs_max=conky_parse('${fs_size /data}')
+        fs_perc=tonumber(conky_parse('${fs_used_perc /data}'))
+        x,y=to_hex_c(x,y,hex_length)
+        set_white(cr)
+        write_text_centered(cr,x,y-10,"/data",extents)
+        set_grey(cr)
+        write_text_centered(cr,x,y,fs.."/"..fs_max,extents)
+        write_text_centered(cr,x,y+10,tostring(fs_perc).."%",extents)
+        draw_gauge(cr,x,y,fs_perc/100,gauge_radius)
+        x,y=from_hex_c(x,y,hex_length)
+    end
+
+    -- Decorative hex
     x,y=from_hex_br(x,y,hex_length)
     x,y=to_hex_tr(x,y,hex_length)
     draw_hex(cr,x,y,hex_length,hex_width)
