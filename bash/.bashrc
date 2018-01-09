@@ -1,6 +1,4 @@
-#
 # ~/.bashrc
-#
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -14,9 +12,12 @@ fi
 PS1='[\t \u@\h \w]\$ '
 
 # Running urxvt? If so, make sure TERM is set correctly
-if [[ -v COLORTERM ]]; then
+if [[ ! -z "$COLORTERM" ]]; then # -z tests empty string. Preferable to -v for compatibility.
     export TERM=rxvt-unicode-256color
 fi
+
+# Ignore Ctrl-d as a shell-killer
+set -o ignoreeof
 
 # User defined aliases
 alias ls='ls --color=auto'

@@ -7,7 +7,7 @@ unsetopt autocd beep extendedglob nomatch
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/liam/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
@@ -16,12 +16,11 @@ compinit
 # User preferences
 
 # Bring in bashrc configuration
-source ~/.bashrc
+source $HOME/.bashrc
 
 # Prompt setup
 autoload -Uz promptinit
 promptinit
-prompt walters
 
 # oh-my-zsh configuration
 if [[ -d $HOME/.oh-my-zsh ]]; then
@@ -33,7 +32,6 @@ if [[ -d $HOME/.oh-my-zsh ]]; then
     DISABLE_AUTO_TITLE="true"
 
     # Theme
-    prompt default
     ZSH_THEME="agnoster"
 
     # Command auto-correction
@@ -44,4 +42,6 @@ if [[ -d $HOME/.oh-my-zsh ]]; then
 
     # Load
     source $ZSH/oh-my-zsh.sh
+else
+    prompt walters
 fi

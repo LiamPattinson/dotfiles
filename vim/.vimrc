@@ -86,6 +86,7 @@ syntax enable
 set background=dark
 colorscheme solarized
 let g:solarized_termcolors=256
+set t_Co=256
 
 " LaTeX Settings
 let g:tex_flavor = "latex"
