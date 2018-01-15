@@ -13,7 +13,7 @@ PS1='[\t \u@\h \w]\$ '
 
 # Running urxvt? If so, make sure TERM is set correctly
 if [[ ! -z "$COLORTERM" ]]; then # -z tests empty string. Preferable to -v for compatibility.
-    export TERM=rxvt-unicode-256color
+    export TERM=xterm-256color
 fi
 
 # Ignore Ctrl-d as a shell-killer
