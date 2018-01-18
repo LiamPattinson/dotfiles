@@ -90,6 +90,12 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # Note: may need extensions from xorgs-apps group
 xorg-server xorg-xinit xorg-xrdb
 
+# For backlight adjustment / multiple screens / gamma adjustment
+xorg-xbacklight xorg-xrandr xorg-xgamma
+
+# screensaver control
+xscreensaver
+
 # Intel graphics
 xf86-video-intell mesa
 # Or you're on a decent machine...
