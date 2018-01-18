@@ -24,6 +24,12 @@ alias ls='ls --color=auto'
 alias l='ls --color=auto -lha'
 alias tmux='tmux -2'
 
+# Path edits
+
+if [[ -d /opt/anaconda ]]; then
+    PATH="$PATH:/opt/anaconda/bin"
+fi
+
 # SSH keychain
 eval $(keychain --eval --quiet --nogui --noask id_rsa)
 
