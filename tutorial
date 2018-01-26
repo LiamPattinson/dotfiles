@@ -1,7 +1,7 @@
 # Collection of recommended first steps for an awesome Linux installation
 
 # ===========================================================================
-# Install according to the excellent resourced at the Arch wiki. This should
+# Install according to the excellent resources at the Arch wiki. This should
 # include partitioning, installing Arch base, installing networking tools,
 # and setting up GRUB.
 
