@@ -324,7 +324,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # Enable x-graphics, provide startx command for firing it up.
 # Note: may need extensions from xorgs-apps group
 xorg-server xorg-xinit xorg-xrdb
-xorg-xbacklight xorg-xrandr xorg-xgamma xscreensaver
+xorg-xbacklight xorg-xrandr xorg-xgamma xscreensaver xcompmgr
 
 # Intel graphics
 xf86-video-intel mesa
@@ -347,22 +347,18 @@ gtk3 qt5-base
 
 # Minimalist LXDE, with:
 # * Openbox window manager
-# * LightDM display manager
+# * no display manager
 # * tint2 taskbar
 # * urxvt terminal emulator
 # * pcmanfm file viewer
 # * alsa sound control
 # * feh + imagemagick image viewer
 # * xpdf pdf viewer
-pacman -S lxde-common lxsession openbox openbox-themes lightdm         \
-    lightdm-gtk-greeter pcmanfm tint2 alsa-utils xpdf rxvt-unicode feh \
-    imagemagick
+pacman -S lxde-common lxsession openbox openbox-themes pcmanfm tint2  \
+    alsa-utils xpdf rxvt-unicode feh imagemagick
 
 # Download the following fonts at a minimum
 gsfonts ttf-roboto ttf-hack ttf-droid ttf-liberation ttf-dejavu
-
-# To get lightdm to do its thing:
-systemctl enable lightdm.service
 
 # Set desktop background:
 feh --bg-center dotfiles/ArchBlueWall.jpg
@@ -376,11 +372,16 @@ conky
 # For a more complex install which allows Lua extensions, use the AUR version
 # (Github version has issues with build system)
 # This is currently mandatory if using the conky config in dotfiles.
-cd ~/AUR
+cd ~/Downloads/AUR
 git clone https://aur.archlinux.org/conky-lua.git
 cd conky-lua
 makepkg -sirc
 
+# To get a collection of Arch artwork:
+cd ~Downloads/AUR
+git clone https://aur.archlinux.org/archlinux-artwork
+cd archlinux-artwork
+makepkg -sirc
 
 # ===========================================================================
 #
