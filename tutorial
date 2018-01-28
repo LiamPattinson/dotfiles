@@ -354,11 +354,14 @@ gtk3 qt5-base
 # * alsa sound control
 # * feh + imagemagick image viewer
 # * xpdf pdf viewer
-pacman -S lxde-common lxsession openbox openbox-themes pcmanfm tint2  \
-    alsa-utils xpdf rxvt-unicode feh imagemagick
+pacman -S lxde-common lxsession openbox openbox-themes lxappearance-obconf \
+     tint2 pcmanfm alsa-utils xpdf rxvt-unicode feh imagemagick
 
 # Download the following fonts at a minimum
 gsfonts ttf-roboto ttf-hack ttf-droid ttf-liberation ttf-dejavu
+
+# Download the following icon themes
+adwaita-icon-theme hicolor-icon-theme papirus-icon-theme
 
 # Set desktop background:
 feh --bg-center dotfiles/ArchBlueWall.jpg
