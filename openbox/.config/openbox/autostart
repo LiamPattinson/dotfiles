@@ -17,5 +17,10 @@
 #xfce-mcs-manager &
 
 ~/.fehbg &
-tint2 &
+
+if which tint2 > /dev/null 2>&1; then
+    (sleep 1 && xcompmgr) &
+    (sleep 1 && tint2) &
+fi
+
 conky -b &
