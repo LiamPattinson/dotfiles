@@ -214,7 +214,7 @@ pacman -S intel-ucode
 pacman -Syu base-devel
 
 # Get other 'essentials'
-zsh git stow tmux openssh keychain cmake python lua
+zsh git stow tmux openssh gnupg keychain cmake python lua
 
 # create user account
 useradd -m -s /bin/zsh liam
@@ -264,7 +264,7 @@ pacman -S os-prober
 
 # ===========================================================================
 # 
-# CONNECT TO GIT
+# SECURE NETWORKING
 # 
 # ===========================================================================
 
@@ -273,6 +273,17 @@ pacman -S os-prober
 ssh-keygen
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
+
+# Generate GnuPG key pair
+
+gpg --full-gen-key
+
+# ===========================================================================
+# 
+# CONNECT TO GIT
+# 
+# ===========================================================================
+
 
 # log in to GitHub and add ~/.ssh/id_rsa.pub. You may have to do
 # this using a different device with a functioning web browser.
@@ -417,7 +428,7 @@ curl -o miniconda3_install.sh 'https://repo.continuum.io/miniconda/Miniconda3-la
 # To enter/leave anaconda environment, call:
 source activate/deactivate
 # Install the following at a minimum:
-conda install numpy scipy matplotlib seaborn pandas scikit-learn
+conda install numpy scipy matplotlib seaborn pandas scikit-learn sqlite sqlalchemy
 
 # HPC components
 gcc-fortran blas lapack fftw openmpi hdf5

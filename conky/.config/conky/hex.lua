@@ -192,6 +192,7 @@ function conky_main()
 
     -- Begin drawing
     x,y=10,500
+    x_start,y_start=x,y
 
     -- Decorative hex
     draw_hex(cr,x,y,hex_length,hex_width)
@@ -254,24 +255,28 @@ function conky_main()
     draw_gauge(cr,x,y,fs_perc/100,gauge_radius)
     x,y=from_hex_c(x,y,hex_length)
 
+    -- back to start...
+    x,y=x_start,y_start
+
     -- Network hex
-    x,y=from_hex_br(x,y,hex_length)
+    -- (Disabled)
     x,y=to_hex_tr(x,y,hex_length)
-    draw_hex(cr,x,y,hex_length,hex_width)
-    x,y=to_hex_c(x,y,hex_length)
-    set_white(cr)
+    x,y=from_hex_br(x,y,hex_length)
+    --draw_hex(cr,x,y,hex_length,hex_width)
+    --x,y=to_hex_c(x,y,hex_length)
+    --set_white(cr)
     --write_text_centered(cr,x,y-25,"NETWORK",extents)
     --write_text_centered(cr,x,y-10,"UPSPEED",extents)
-    set_grey(cr)
+    --set_grey(cr)
     --write_text_centered(cr,x,y,conky_parse('${upspeed '..wlan..'}'),extents)
-    set_white(cr)
+    --set_white(cr)
     --write_text_centered(cr,x,y+10,"DOWNSPEED",extents)
-    set_grey(cr)
+    --set_grey(cr)
     --write_text_centered(cr,x,y+20,conky_parse('${downspeed '..wlan..'}'),extents)
-    x,y=from_hex_c(x,y,hex_length)
+    --x,y=from_hex_c(x,y,hex_length)
 
     -- Processes hex
-    x,y=from_hex_br(x,y,hex_length)
+    x,y=to_hex_tr(x,y,hex_length)
     draw_hex(cr,x,y,hex_length,hex_width)
     x,y=to_hex_c(x,y,hex_length)
     set_white(cr)
@@ -285,7 +290,7 @@ function conky_main()
     x,y=from_hex_c(x,y,hex_length)
 
     -- Optional hex
-    x,y=to_hex_tr(x,y,hex_length)
+    x,y=from_hex_br(x,y,hex_length)
     draw_hex(cr,x,y,hex_length,hex_width)
     if tonumber(conky_parse('${if_mounted /data}1${endif}')) then
         fs=conky_parse('${fs_used /data}')
@@ -301,9 +306,9 @@ function conky_main()
         x,y=from_hex_c(x,y,hex_length)
     end
 
-    -- Decorative hex
-    x,y=from_hex_br(x,y,hex_length)
+    -- Decorative hexes
     x,y=to_hex_tr(x,y,hex_length)
+    x,y=from_hex_br(x,y,hex_length)
     draw_hex(cr,x,y,hex_length,hex_width)
 
     -- clean up cairo
