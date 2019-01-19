@@ -7,7 +7,7 @@ fade:		True
 unfade:		True
 fadeSeconds:	0:00:03
 fadeTicks:	20
-dpmsEnabled:	True
+dpmsEnabled:	False
 dpmsStandby:	2:00:00
 dpmsSuspend:	2:00:00
 dpmsOff:	4:00:00

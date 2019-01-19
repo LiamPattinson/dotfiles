@@ -214,7 +214,7 @@ pacman -S intel-ucode
 pacman -Syu base-devel
 
 # Get other 'essentials'
-zsh git stow tmux openssh gnupg keychain cmake python lua
+zsh git stow tmux openssh gnupg keychain cmake python lua unzip
 
 # create user account
 useradd -m -s /bin/zsh liam
@@ -428,7 +428,7 @@ curl -o miniconda3_install.sh 'https://repo.continuum.io/miniconda/Miniconda3-la
 # To enter/leave anaconda environment, call:
 source activate/deactivate
 # Install the following at a minimum:
-conda install numpy scipy matplotlib seaborn pandas scikit-learn sqlite sqlalchemy
+conda install numpy scipy matplotlib seaborn pandas scikit-learn sqlite sqlalchemy pymongo
 
 # HPC components
 gcc-fortran blas lapack fftw openmpi hdf5
@@ -445,3 +445,18 @@ texlive-latexextra
 texlive-science
 # For publications, you may need:                           (medium download)
 texlive-publishers
+
+
+# ===========================================================================
+#
+# NOTES
+#
+# ===========================================================================
+
+# pacman will hold on to everything you install. To clear the cache of unused files:
+pacman -Sc
+# to clear the cache of all files, even those currently in use:
+pacman -Scc
+# Say you install package A, which has B as a requirement. You remove A. pacman will
+# not automatically remove B. To do so:
+pacman -Rns $(pacman -Qtdq)
