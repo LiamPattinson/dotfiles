@@ -38,7 +38,15 @@ if [[ -d $HOME/.oh-my-zsh ]]; then
     ENABLE_CORRECTION="true"
 
     # Plugins, format: plugins=(git python ruby)
-    plugins=(git)
+    plugins=(
+        git
+        zsh-autocorrections
+        python
+        catimg
+        colored-man-pages
+        zsh-autocorrections
+        zsh-syntax-highlighting
+    )
 
     # Load
     source $ZSH/oh-my-zsh.sh

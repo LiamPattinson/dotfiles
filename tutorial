@@ -313,6 +313,10 @@ curl -o oh-my-zsh-install.sh https://raw.githubusercontent.com/robbyrussell/oh-m
 chmod u+x oh-my-zsh-install.sh
 ./oh-my-zsh-install.sh
 
+# Go into .oh-my-zsh/custom/plugins
+git clone https://github.com/zsh-users/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions
+
 # This will, quite rudely, push your .zshrc to .zshrc.pre-oh-my-zsh.
 # Fix this by calling `stow zsh` from ~/dotfiles.
 
