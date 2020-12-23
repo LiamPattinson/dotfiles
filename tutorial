@@ -15,9 +15,10 @@
 
 
 # Download iso from any respectable mirroring service.
-# Ensure USB is set up correctly. Recommend ext2 on gpt, then:
+# Ensure USB is set up correctly. Recommend ext2 on gpt, then copy image:
 dd bs=4M if=/path/to/arch.iso of=/dev/sdx status=progress oflag=sync
 # Don't include partition number in /dev/sdx
+# Reboot from this USB
 
 # Once running:
 loadkeys uk
@@ -41,9 +42,11 @@ timedatectl set-ntp true
 # /     - About 20GB max
 # /swap - About 2GB
 # /home - The rest
+# Do this using gdisk. It has a good cmd line interface. You'll need partition
+# codes ef00 to make an EFI boot partiion, and 8e00 for LVM. 
 
 # If you're intending to go LVM, don't worry about /, /home and /swap yet.
-# Just lump these together into one big partition with code 8e00. You will
+# Just lump these together into one big partition for now. You will
 # still need a separate /boot.
 
 # If RAIDing, you may need to divide each disc into two partitions plus a
@@ -61,7 +64,7 @@ mkfs.fat -F32 /dev/sdXY
 # OPTIONAL -- RAID
 # ===========================================================================
 
-# Coming soon
+# Coming whenever I figure it out
 
 # ===========================================================================
 # OPTIONAL -- ENCRYPTION
@@ -155,7 +158,7 @@ ping archlinux.org
 
 
 # Use pacstrap to build a basic Arch system
-pacstrap /mnt base
+pacstrap /mnt base linux linux-firmware
 
 
 # ===========================================================================
@@ -168,7 +171,7 @@ pacstrap /mnt base
 # Generate fstab file
 genfstab -U /mnt >> /mnt/etc/fstab
 
-# Copy over netctl profile, if needed
+# Copy over netctl profile, if needed, or make one from scratch later
 cp /etc/netctl/myprofile /mnt/etc/netctl/myprofile
 
 # choot in
@@ -199,7 +202,9 @@ KEYMAP=uk
 # Install networking tools
 pacman -S iw wpa_supplicant netctl
 
-# If you used LVM, you will need to edit /etc/mkinitcpio.conf
+# If you used LVM, you will need to download lvm2
+pacman -S lvm2
+# then edit /etc/mkinitcpio.conf
 HOOKS=(... keyboard keymap block encrypt lvm2 ... filesystems ...)
 # and recreate initramfs image...
 mkinitcpio -p linux
@@ -214,7 +219,7 @@ pacman -S intel-ucode
 pacman -Syu base-devel
 
 # Get other 'essentials'
-zsh git stow tmux openssh keychain cmake python lua
+zsh git stow tmux openssh keychain cmake python python3 lua swig
 
 # create user account
 useradd -m -s /bin/zsh liam

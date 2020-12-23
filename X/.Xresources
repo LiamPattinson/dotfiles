@@ -1,3 +1,4 @@
 #include ".Xresources.d/xft"
+#include ".Xresources.d/solarized_colors"
 #include ".Xresources.d/rxvt-unicode"
 
