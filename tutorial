@@ -368,7 +368,7 @@ nvidia nvidia-utils
 # Or perhaps some specific driver name
 
 # Optional, but recommended
-gtk3 qt5-base
+gtk3 qt5-base tk
 # Many later packages have these as a dependency. Installing them here will
 # allow for more accurate package sizes later.
 
@@ -390,7 +390,7 @@ gtk3 qt5-base
 # * feh + imagemagick image viewer
 # * xpdf pdf viewer
 # * vlc media player (has useful codecs as dependencies)
-pacman -S lxde-common lxsession openbox openbox-themes lxappearance-obconf tint2\
+pacman -S lxde-common lxsession lxrandr lxinput openbox obconf lxappearance-obconf tint2\
     pcmanfm-gtk3 alsa-utils pulseaudio xpdf rxvt-unicode feh imagemagick vlc
 
 # Download the following fonts at a minimum
@@ -402,24 +402,27 @@ adwaita-icon-theme hicolor-icon-theme papirus-icon-theme
 # Set desktop background:
 feh --bg-center dotfiles/ArchBlueWall.jpg
 
-# To enable Python IDLE
-tk
-
 # conky
 # For simple install:
 conky
 # For a more complex install which allows Lua extensions, use the AUR version
 # (Github version has issues with build system)
 # This is currently mandatory if using the conky config in dotfiles.
-cd ~/Downloads/AUR
+cd ~/AUR
 git clone https://aur.archlinux.org/conky-lua.git
 cd conky-lua
 makepkg -sirc
 
 # To get a collection of Arch artwork:
-cd ~Downloads/AUR
+cd ~/AUR
 git clone https://aur.archlinux.org/archlinux-artwork
 cd archlinux-artwork
+makepkg -sirc
+
+# To get more openbox themes:
+cd ~/AUR
+git clone https://aur.archlinux.org/openbox-themes
+cd openbox-themes
 makepkg -sirc
 
 # ===========================================================================
@@ -447,7 +450,7 @@ gdb valgrind
 
 # Miniconda (install to opt)
 # Install with:
-curl -o miniconda3_install.sh 'https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh'
+curl -o miniconda3_install.sh 'https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh'
 # When prompted, tell it to install to /opt/anaconda
 # To enter/leave anaconda environment, call
 conda activate/deactivate
@@ -484,3 +487,9 @@ pacman -Scc
 # Say you install package A, which has B as a requirement. You remove A. pacman will
 # not automatically remove B. To do so:
 pacman -Rns $(pacman -Qtdq)
+
+# downloading from AUR typically requires
+git clone https://aur.archlinux.org/package-name
+cd package-name
+makepkg -sirc
+# then say 'y' to everything
