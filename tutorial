@@ -52,13 +52,19 @@ timedatectl set-ntp true
 # If RAIDing, you may need to divide each disc into two partitions plus a
 # /boot partition.
 
+# Use lsblk to see partitions
+# The harddrive/ssd you'll be partitioning will be /dev/sdx, where x is a letter
+# Each partition on this device will be /dev/sdx#, where # is a number.
+# Note which number is the boot and which is the root, as this guide doesn't
+# distinguish which you'll need, but it should be obvious in context.
+
 # ===========================================================================
 # BOOT PARTITION
 # ===========================================================================
 
 # Partition 512MB GPT for an EFI System Partition (ESP). Use gdisk, EF00.
 # Then, format with FAT32 filesystem:
-mkfs.fat -F32 /dev/sdXY
+mkfs.fat -F32 /dev/sdx#
 
 # ===========================================================================
 # OPTIONAL -- RAID
@@ -72,19 +78,20 @@ mkfs.fat -F32 /dev/sdXY
 
 # Step 1: Clean your disk. Could take a while, especially for large disks.
 
-# First, create encrypted partition (sdXY for one partition, sdX for disk)
-cryptsetup open --type plain /dev/sdXY container --key-file /dev/random
+# First, create encrypted partition (sdx# for one partition, sdx for disk)
+cryptsetup open --type plain /dev/sdx# container --key-file /dev/random
 
 # Check it exists with lsblk, then:
 dd if=/dev/zero of=/dev/mapper/container status=progress
+# Warning: can take hours for a large HDD
 
 # Close container
 cryptsetup close container
 
 # Step 2: Create LUKS encrypted container
 
-cryptsetup luksFormat --type luks2 /dev/sdXY
-cryptsetup open /dev/sdXY cryptrootname
+cryptsetup luksFormat --type luks2 /dev/sdx#
+cryptsetup open /dev/sdx# cryptrootname
 
 # At this point, make a filesystem at /dev/mapper/cryptroot and mount. Or,
 # progress to LVM.
@@ -98,10 +105,10 @@ lvmdiskscan
 
 # Create physical volume on desired target. If you just encrypted, this
 # should be /dev/mapper/cryptrootname
-pvcreate /dev/sdXY
+pvcreate /dev/sdx#
 
 # Create a volume group
-vgcreate MyVolGroup /dev/sdXY
+vgcreate MyVolGroup /dev/sdx#
 
 # This can be extended to other physical volumes:
 vgextend MyVolGroup /dev/sdZ
@@ -127,7 +134,7 @@ mkdir /mnt/home
 mount /dev/mapper/MyVolGroup-home /mnt/home
 swapon /dev/mapper/MyVolGroup-swap
 mkdir /mnt/boot
-mount /dev/sdX /mnt/boot
+mount /dev/sdx# /mnt/boot # mount whichever device is the boot partition
 
 
 # ===========================================================================
@@ -145,6 +152,7 @@ ip link
 # Then, set up a netctl profile. Copy /etc/netctl/examples/wireless-wpa to
 # /etc/netctl/myprofile. Update interface, SSID and key as necessary, then:
 netctl start myprofile
+# Note, arch may not ship with netctl anymore. Check wiki.
 
 # Test with:
 ping archlinux.org
@@ -177,6 +185,9 @@ cp /etc/netctl/myprofile /mnt/etc/netctl/myprofile
 # choot in
 arch-chroot /mnt
 
+# Update
+pacman -Syu
+
 # get vim
 pacman -S vim
 
@@ -200,7 +211,8 @@ KEYMAP=uk
 <my_comp_name>
 
 # Install networking tools
-pacman -S iw wpa_supplicant netctl
+pacman -S iw wpa_supplicant netctl dhcpcd
+# Remember to make a netctl profile here if you didn't copy one over before
 
 # If you used LVM, you will need to download lvm2
 pacman -S lvm2
@@ -215,11 +227,8 @@ passwd
 # For Intel CPUs:
 pacman -S intel-ucode
 
-# Get essential cmd line tools
-pacman -Syu base-devel
-
-# Get other 'essentials'
-zsh git stow tmux openssh gnupg keychain cmake python python3 lua unzip swig
+# Get essential cmd line tools and other 'essentials'
+pacman base-devel zsh man git stow tmux openssh gnupg keychain cmake python python3 lua unzip swig
 
 # create user account
 useradd -m -s /bin/zsh liam
@@ -248,23 +257,29 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub
 # Uncomment colours, if desired. Defaults to black and white.
 
 # If encrypted, set:
-GRUB_CMDLINE_LINUX="... cryptdevice=/dev/<cryptdev>:cryptrootname"
+GRUB_CMDLINE_LINUX="... cryptdevice=/dev/sdx#:cryptrootname"
 
 # If LVM, edit /etc/default/grub to include:
 GRUB_PRELOAD_MODULES="... lvm"
 GRUB_CMDLINE_LINUX="... root=/dev/mapper/MyVolGroup-root"
 
-# Then, remake grub.cfg
+# Then, make grub.cfg
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # To find and include other systems:
 pacman -S os-prober
 # and mount any other partitions before remaking grub.cfg
 
+# ===========================================================================
+# 
+# WORKING WITHIN THE NEW OS
+# 
+# ===========================================================================
 # At this point, you can safely quit your chroot environment, umount any
 # partitions, and reboot the system. If you're lucky, it all worked.
 # Everything from this point onwards should be performed as a standard user;
 # not as root.
+# ===========================================================================
 
 
 # ===========================================================================
@@ -434,10 +449,10 @@ gdb valgrind
 # Install with:
 curl -o miniconda3_install.sh 'https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh'
 # When prompted, tell it to install to /opt/anaconda
-# To enter/leave anaconda environment, call:
-source activate/deactivate
+# To enter/leave anaconda environment, call
+conda activate/deactivate
 # Install the following at a minimum:
-conda install numpy scipy matplotlib seaborn pandas scikit-learn sqlite sqlalchemy pymongo
+conda install numpy scipy matplotlib seaborn pandas scikit-learn 
 
 # HPC components
 gcc-fortran blas lapack fftw openmpi hdf5
