@@ -391,7 +391,7 @@ gtk3 qt5-base tk
 # * xpdf pdf viewer
 # * vlc media player (has useful codecs as dependencies)
 pacman -S lxde-common lxsession lxrandr lxinput openbox obconf lxappearance-obconf tint2\
-    pcmanfm-gtk3 alsa-utils pulseaudio xpdf rxvt-unicode feh imagemagick vlc
+    pcmanfm-gtk3 alsa-utils pulseaudio pulseaudio-alsa xpdf rxvt-unicode feh imagemagick vlc
 
 # Download the following fonts at a minimum
 gsfonts ttf-roboto ttf-hack ttf-droid ttf-liberation ttf-dejavu
