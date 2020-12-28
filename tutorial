@@ -455,10 +455,10 @@ curl -o miniconda3_install.sh 'https://repo.anaconda.com/miniconda/Miniconda3-la
 # To enter/leave anaconda environment, call
 conda activate/deactivate
 # Install the following at a minimum:
-conda install numpy scipy matplotlib seaborn pandas scikit-learn 
+conda install numpy scipy matplotlib seaborn pandas scikit-learn mpi4py h5py
 
 # HPC components
-gcc-fortran blas lapack fftw openmpi hdf5
+gcc-fortran openblas lapack arpack superlu fftw openmpi hdf5 intel-mkl
 
 # Optional bloaty things
 gnuplot octave
