@@ -228,7 +228,7 @@ passwd
 pacman -S intel-ucode
 
 # Get essential cmd line tools and other 'essentials'
-pacman base-devel zsh man git stow tmux openssh gnupg keychain cmake python python3 lua unzip swig
+pacman base-devel zsh man git stow tmux openssh gnupg keychain cmake python python3 python-pip lua unzip swig
 
 # create user account
 useradd -m -s /bin/zsh liam
@@ -473,6 +473,19 @@ texlive-science
 # For publications, you may need:                           (medium download)
 texlive-publishers
 
+
+
+# ===========================================================================
+# 
+# WEBDEV
+#
+# ===========================================================================
+
+OS level:
+docker nginx
+
+Python: (avoid conda for this stuff, use pip)
+flask
 
 # ===========================================================================
 #

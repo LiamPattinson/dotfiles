@@ -43,6 +43,9 @@ Plugin 'vim-latex/vim-latex'
 " rust syntax highlighting
 Plugin 'rust-lang/rust.vim'
 
+" SWIG syntax highlighting (seems to be broken...)
+" Plugin 'swig'
+
 " ==================================================================
 
 " All of your Plugins must be added before the following line
@@ -90,6 +93,9 @@ set t_Co=256
 
 " LaTeX Settings
 let g:tex_flavor = "latex"
-au BufRead *.tex setlocal tw=79
-au BufRead *.tex setlocal spell spelllang=en_gb
+au BufRead,BufNewFile *.tex setlocal tw=79
+au BufRead,BufNewFile *.tex setlocal spell spelllang=en_gb
 helptags ~/.vim/bundle/vim-latex/doc
+
+" SWIG Settings
+au BufRead,BufNewFile *.i,*.swg,*.swig :setlocal filetype=cpp
