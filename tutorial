@@ -227,8 +227,8 @@ passwd
 # For Intel CPUs:
 pacman -S intel-ucode
 
-# Get essential cmd line tools and other 'essentials'
-pacman base-devel zsh man git stow tmux openssh gnupg keychain cmake python python3 python-pip lua unzip swig
+# Get essential cmd line tools and other essentials
+pacman base-devel zsh man git stow tmux openssh gnupg keychain python-pip lua unzip 
 
 # create user account
 useradd -m -s /bin/zsh liam
@@ -388,10 +388,11 @@ gtk3 qt5-base tk
 # * pcmanfm file viewer
 # * alsa + pulseaudio sound control
 # * feh + imagemagick image viewer
+# * netpbm portable bitmap
 # * xpdf pdf viewer
 # * vlc media player (has useful codecs as dependencies)
 pacman -S lxde-common lxsession lxrandr lxinput openbox obconf lxappearance-obconf tint2\
-    pcmanfm-gtk3 alsa-utils pulseaudio pulseaudio-alsa xpdf rxvt-unicode feh imagemagick vlc
+    pcmanfm-gtk3 alsa-utils pulseaudio pulseaudio-alsa xpdf rxvt-unicode feh imagemagick netpbm vlc
 
 # Download the following fonts at a minimum
 gsfonts ttf-roboto ttf-hack ttf-droid ttf-liberation ttf-dejavu
@@ -444,21 +445,18 @@ vlc
 #
 # ===========================================================================
 
+# C/C++/Fortran
+cmake doxygen gcc-fortran
 
 # Debugging
-gdb valgrind 
+gdb valgrind kcachegrind
 
-# Miniconda (install to opt)
-# Install with:
-curl -o miniconda3_install.sh 'https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh'
-# When prompted, tell it to install to /opt/anaconda
-# To enter/leave anaconda environment, call
-conda activate/deactivate
-# Install the following at a minimum:
-conda install numpy scipy matplotlib seaborn pandas scikit-learn mpi4py h5py
+# Python
+python3 python-pip swig
+sudo pip-intall numpy scipy matplotlib seaborn pandas scikit-learn mpi4py h5py
 
 # HPC components
-gcc-fortran openblas lapack arpack superlu fftw openmpi hdf5 intel-mkl
+openblas lapack arpack superlu fftw openmpi hdf5-openmpi intel-mkl
 
 # Optional bloaty things
 gnuplot octave

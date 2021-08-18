@@ -93,7 +93,7 @@ set t_Co=256
 
 " LaTeX Settings
 let g:tex_flavor = "latex"
-au BufRead,BufNewFile *.tex setlocal tw=79
+au BufRead,BufNewFile *.tex setlocal tw=119
 au BufRead,BufNewFile *.tex setlocal spell spelllang=en_gb
 helptags ~/.vim/bundle/vim-latex/doc
 
