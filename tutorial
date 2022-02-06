@@ -1,6 +1,6 @@
 
 # ===========================================================================
-# Collection of recommended first steps for an awesome Linux installation
+# Collection of recommended first steps for a lightweight Linux installation.
 # Information gleaned from the excellent resources at the Arch wiki.
 # Include partitioning, setting up a bootloader, installing Arch base, and
 # building a more complete desktop experience from there
@@ -16,7 +16,10 @@
 
 # Download iso from any respectable mirroring service.
 # Ensure USB is set up correctly. Recommend ext2 on gpt, then copy image:
+
 dd bs=4M if=/path/to/arch.iso of=/dev/sdx status=progress oflag=sync
+
+# Where /dev/sdx is the /dev location of your USB drive.
 # Don't include partition number in /dev/sdx
 # Reboot from this USB
 
@@ -64,6 +67,7 @@ timedatectl set-ntp true
 
 # Partition 512MB GPT for an EFI System Partition (ESP). Use gdisk, EF00.
 # Then, format with FAT32 filesystem:
+
 mkfs.fat -F32 /dev/sdx#
 
 # ===========================================================================
@@ -182,7 +186,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 # Copy over netctl profile, if needed, or make one from scratch later
 cp /etc/netctl/myprofile /mnt/etc/netctl/myprofile
 
-# choot in
+# chroot in
 arch-chroot /mnt
 
 # Update
@@ -207,7 +211,7 @@ LANG=en_GB.UTF-8
 # Set keyboard in /etc/vconsole.conf
 KEYMAP=uk
 
-# Set hostname in /ec/hostname
+# Set hostname in /etc/hostname
 <my_comp_name>
 
 # Install networking tools
@@ -231,10 +235,10 @@ pacman -S intel-ucode
 pacman base-devel zsh man git stow tmux openssh gnupg keychain python-pip lua unzip 
 
 # create user account
-useradd -m -s /bin/zsh liam
-passwd liam
+useradd -m -s /bin/zsh your_name
+passwd your_name
 # add to sudoers with visudo
-# find line containing 'root ALL=(ALL) ALL', add line 'liam ALL=(ALL) ALL'
+# find line containing 'root ALL=(ALL) ALL', add line 'your_name ALL=(ALL) ALL'
 
 # Make .bash_local in home directory. This should include, at a minimum:
 export WLAN=<wlan_device>
@@ -275,7 +279,7 @@ pacman -S os-prober
 # WORKING WITHIN THE NEW OS
 # 
 # ===========================================================================
-# At this point, you can safely quit your chroot environment, umount any
+# At this point, you can safely quit your chroot environment, unmount any
 # partitions, and reboot the system. If you're lucky, it all worked.
 # Everything from this point onwards should be performed as a standard user;
 # not as root.
@@ -315,7 +319,7 @@ git clone git@github.com:LiamPattinson/dotfiles.git
 # This should include everything but conky -- this will need to be
 # installed later.
 # Be sure that your $HOME directory has the required directory structure
-# being stowing -- if it doesn't, it'll create symlink directories to the
+# before stowing -- if it doesn't, it'll create symlink directories to the
 # ~/dotfiles dir, which will cause all kinds of problems.
 
 
@@ -363,7 +367,7 @@ xorg-xbacklight xorg-xrandr xorg-xgamma xscreensaver xcompmgr
 
 # Intel graphics
 xf86-video-intel mesa
-# Or you're on a decent machine...
+# If you're on a decent machine...
 nvidia nvidia-utils
 # Or perhaps some specific driver name
 
@@ -441,35 +445,37 @@ vlc
 
 # ===========================================================================
 # 
-# DEVELOPER / SCIENTIST KIT
+# DEVELOPER KIT
 #
 # ===========================================================================
 
 # C/C++/Fortran
-cmake doxygen gcc-fortran
+pacman -S cmake doxygen gcc-fortran
 
 # Debugging
-gdb valgrind kcachegrind
+pacman -S gdb valgrind kcachegrind
 
 # Python
-python3 python-pip swig
-sudo pip-intall numpy scipy matplotlib seaborn pandas scikit-learn mpi4py h5py
+pacman -S python3 python-pip
+python3 -m pip install venv flake8 black build twine
+# Sciency bits (maybe use a venv for these)
+python3 -m pip install numpy scipy matplotlib seaborn pandas scikit-learn...
 
 # HPC components
-openblas lapack arpack superlu fftw openmpi hdf5-openmpi intel-mkl
+pacman -S openblas lapack arpack superlu fftw openmpi hdf5-openmpi intel-mkl
 
 # Optional bloaty things
-gnuplot octave
+pacman -S gnuplot octave
 
 # LaTeX
 # Minimum                                                    (large download)
-texlive-core texlive-bin biber
+pacman -S texlive-core texlive-bin biber
 # To get some more obscure packages:                        (medium download)
-texlive-latexextra
+pacman -S texlive-latexextra
 # For various mathematics and science packages:              (small download)
-texlive-science
+pacman -S texlive-science
 # For publications, you may need:                           (medium download)
-texlive-publishers
+pacman -S texlive-publishers
 
 
 
