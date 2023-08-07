@@ -11,6 +11,10 @@ fi
 # Command prompt
 PS1='[\t \u@\h \w]\$ '
 
+# Set up readline
+# Doesn't apply in zsh
+set -o vi
+
 # Running urxvt? If so, make sure TERM is set correctly
 if [[ ! -z "$COLORTERM" ]]; then # -z tests empty string. Preferable to -v for compatibility.
     export TERM=xterm-256color
@@ -23,11 +27,15 @@ set -o ignoreeof
 
 # User defined aliases
 alias ls='ls --color=auto'
-alias l='ls --color=auto -lha'
+alias l='ls --color=auto -lha --group-directories-first'
 alias tmux='tmux -2'
 
-# Path edits
+# nvim over vim
+if [[ -f /usr/bin/nvim ]]; then
+    alias vim=nvim
+fi
 
+# Path edits
 if [[ -d /opt/anaconda ]]; then
     PATH="$PATH:/opt/anaconda/bin"
 fi

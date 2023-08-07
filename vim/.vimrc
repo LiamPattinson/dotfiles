@@ -43,6 +43,9 @@ Plugin 'vim-latex/vim-latex'
 " rust syntax highlighting
 Plugin 'rust-lang/rust.vim'
 
+" toml syntax highlighting
+Plugin 'cespare/vim-toml'
+
 " SWIG syntax highlighting (seems to be broken...)
 " Plugin 'swig'
 
@@ -78,11 +81,19 @@ let g:airline_powerline_fonts = 1
 set relativenumber
 set number
 
+" Column indicating soft end-of-line
+set colorcolumn=88
+
 " Indenting
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+au FileType fortran setlocal  tabstop=2 softtabstop=2 shiftwidth=2
+au FileType c setlocal  tabstop=2 softtabstop=2 shiftwidth=2
+au FileType cpp setlocal  tabstop=2 softtabstop=2 shiftwidth=2
+au FileType cmake setlocal  tabstop=2 softtabstop=2 shiftwidth=2
+
 
 " Colorscheme
 syntax enable
@@ -93,9 +104,16 @@ set t_Co=256
 
 " LaTeX Settings
 let g:tex_flavor = "latex"
-au BufRead,BufNewFile *.tex setlocal tw=119
+au BufRead,BufNewFile *.tex setlocal tw=88
 au BufRead,BufNewFile *.tex setlocal spell spelllang=en_gb
 helptags ~/.vim/bundle/vim-latex/doc
 
 " SWIG Settings
 au BufRead,BufNewFile *.i,*.swg,*.swig :setlocal filetype=cpp
+
+" Input c/cpp files
+au BufRead,BufNewFile *.c.in,*.h.in :setlocal filetype=c
+au BufRead,BufNewFile *.cpp.in,*.hpp.in,*.cxx.in,*.hxx.in,*.H.in,*C.in :setlocal filetype=cpp
+
+" pFUnit test files
+au BufNewFile,BufRead *.pf   :setlocal filetype=fortran

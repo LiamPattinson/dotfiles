@@ -1,3 +1,13 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Bring in bashrc configuration
+source $HOME/.bashrc
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -15,47 +25,46 @@ compinit
 
 # User preferences
 
-# Bring in bashrc configuration
-source $HOME/.bashrc
+
+# Create settings dir
+if [[ ! -d $HOME/.zsh ]]; then
+    mkdir $HOME/.zsh
+fi
 
 # Prompt setup
 autoload -Uz promptinit
 promptinit
 
-# oh-my-zsh configuration
-if [[ -d $HOME/.oh-my-zsh ]]; then
-	
-    # Path to your oh-my-zsh installation.
-    export ZSH=$HOME/.oh-my-zsh
-
-    # Prevent automatic window renaming
-    DISABLE_AUTO_TITLE="true"
-
-    # Theme
-    if [[ $TERM == "xterm-256color" ]]; then
-        ZSH_THEME="agnoster"
-    else
-        ZSH_THEME="robbyrussell"
-    fi
-
-    # Command auto-correction
-    ENABLE_CORRECTION="true"
-
-    # Plugins, format: plugins=(git python ruby)
-    plugins=(
-        git
-        python
-        catimg
-        colored-man-pages
-        zsh-autosuggestions
-        zsh-syntax-highlighting
-    )
-
-    # Load
-    source $ZSH/oh-my-zsh.sh
-else
-    prompt walters
+# Install antigen
+ANTIGEN_FILE=$HOME/.zsh/antigen.zsh
+if [[ ! -f $ANTIGEN_FILE ]]; then
+    curl -L git.io/antigen > $ANTIGEN_FILE
 fi
+source $ANTIGEN_FILE
+
+# Use oh-my-zsh for plugins
+antigen use oh-my-zsh
+
+antigen bundle common-aliases # Add things like l, la, rm/cp/mv protection
+antigen bundle colored-man-pages # what it says in the name
+antigen bundle git # Git aliases
+antigen bundle git-prompt # Info about current repo
+antigen bundle gitfast # Autocompletion for git
+antigen bundle history-substring-search # Search history with incomplete command
+antigen bundle heroku  # Better autocomplete
+antigen bundle pip # PyPI autocomplete
+antigen bundle python # Python aliases (mkv for making venv, vrun for activating)
+antigen bundle tmux # Automatically set correct tmux settings
+
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+antigen theme romkatv/powerlevel10k
+
+antigen apply
+
+# Something earlier seems to unset this...
+bindkey -v
 
 if [[ -d /opt/anaconda ]]; then
     __conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -70,3 +79,6 @@ if [[ -d /opt/anaconda ]]; then
     fi
     unset __conda_setup
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
