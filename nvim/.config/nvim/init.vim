@@ -19,43 +19,43 @@ call plug#begin()
     " Additional snippets
     Plug 'rafamadriz/friendly-snippets'
 
-    " Fuzzy file finder
+    " Fuzzy file finder, better file browser
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+    Plug 'nvim-telescope/telescope-file-browser.nvim'
+    Plug 'nvim-tree/nvim-web-devicons'
 
     " Status line
     Plug 'nvim-lualine/lualine.nvim'
 
-    " Better file explorer
-    Plug 'nvim-tree/nvim-tree.lua'
-    Plug 'nvim-tree/nvim-web-devicons'
+    " Better terminal
+    Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+
+    " Better folding
+    " Try https://github.com/kevinhwang91/nvim-ufo sometime
 
     " Git stuff
     Plug 'tpope/vim-fugitive'
     Plug 'mhinz/vim-signify'
 
+    " Auto-documenting
+    Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+
     " Python stuff
     Plug 'psf/black', { 'branch': 'stable' }
-    Plug 'heavenshell/vim-pydocstring'
 
     " Indent line
     Plug 'Yggdroot/indentLine'
 
-    " Session saving (use :Obsess)
-    Plug 'tpope/vim-obsession'
-
-    " Better commenting utils, i.e. \cc to comment selected line
-    Plug 'preservim/nerdcommenter'
+    " Better commenting utils, uses gc plus movement (gcc to comment line)
+    Plug 'numToStr/Comment.nvim'
 
     " Show the context of for loops, if statements etc
     Plug 'wellle/context.vim'
 
-    " Better startup screen
+    " Better startup screen, session management (:SLoad, :SSave, :SDelete, :SClose)
     Plug 'mhinz/vim-startify'
-
-    " Reasonable defaults
-    Plug 'tpope/vim-sensible'
 
     " Theme
     Plug 'dracula/vim'
@@ -69,6 +69,9 @@ call plug#begin()
     
     " LaTeX
     Plug 'vim-latex/vim-latex'
+
+    " Reasonable defaults
+    Plug 'tpope/vim-sensible'
 
 call plug#end()
 
@@ -123,7 +126,8 @@ require('nvim-cmp-config')
 require('lspconfig-config')
 require('telescope-config')
 require('lualine-config')
-require('nvim-tree-config')
+require('comment-config')
+require('toggleterm-config')
 EOF
 
 " snippets
@@ -193,26 +197,31 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-" hardmode settingslet 
+" hardmode settings
 let g:hardtime_default_on = 1
 let g:hardtime_showmsg = 1
 let g:hardtime_ignore_buffer_patterns = [ "vim.lsp" ]
 let g:hardtime_maxcount = 4
 let g:hardtime_motion_with_count_resets = 1
 
-" Settings for LaTeX
+" Default auto-documenting settings
+let g:doge_doc_standard_python = 'numpy'
+
+" Settings for LaTeX, markdown, rst, etc
 let g:tex_flavor = "latex"
-au BufRead,BufNewFile *.tex setlocal tw=88
-au BufRead,BufNewFile *.tex setlocal spell spelllang=en_gb
+autocmd FileType tex,latex,rst,markdown setlocal tw=88
+autocmd FileType tex,latex,rst,markdown setlocal spell spelllang=en_gb tw=88
 
 " Settings for C/C++/Fortran
-au FileType fortran setlocal  tabstop=2 softtabstop=2 shiftwidth=2
-au FileType c setlocal  tabstop=2 softtabstop=2 shiftwidth=2
-au FileType cpp setlocal  tabstop=2 softtabstop=2 shiftwidth=2
-au FileType cmake setlocal  tabstop=2 softtabstop=2 shiftwidth=2
-au BufRead,BufNewFile *.c.in,*.h.in :setlocal filetype=c
-au BufRead,BufNewFile *.cpp.in,*.hpp.in,*.cxx.in,*.hxx.in,*.H.in,*C.in :setlocal filetype=cpp
-au BufNewFile,BufRead *.pf :setlocal filetype=fortran
+autocmd FileType c,cpp,cmake,fortran setlocal tabstop=2 softtabstop=2 shiftwidth=2
+autocmd BufRead,BufNewFile *.c.in,*.h.in setlocal filetype=c
+autocmd BufRead,BufNewFile *.cpp.in,*.hpp.in,*.cxx.in,*.hxx.in,*.H.in,*C.in setlocal filetype=cpp
+autocmd BufRead,BufNewFile *.pf setlocal filetype=fortran
+
+" Disable dangerous exit modes
+nnoremap Z <Nop>
+nnoremap ZZ <Nop>
+nnoremap ZQ <Nop>
 
 filetype plugin indent on
 syntax on
