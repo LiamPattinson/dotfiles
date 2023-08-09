@@ -510,3 +510,11 @@ git clone https://aur.archlinux.org/package-name
 cd package-name
 makepkg -sirc
 # then say 'y' to everything
+
+
+# TODO
+# need to make a list of things for _not_ arch...
+Get npm, install yarn and upgrade node.
+Get fd-find.
+Install nvim over vim, set an alias for it.
+Get lazygit.

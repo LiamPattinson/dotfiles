@@ -57,8 +57,11 @@ call plug#begin()
     " Better startup screen, session management (:SLoad, :SSave, :SDelete, :SClose)
     Plug 'mhinz/vim-startify'
 
-    " Theme
+    " Themes
     Plug 'dracula/vim'
+    Plug 'EdenEast/nightfox.nvim'
+    Plug 'folke/tokyonight.nvim'
+    Plug 'ishan9299/nvim-solarized-lua'
 
     " Hardmode. Git gud.
     Plug 'takac/vim-hardtime'
@@ -114,7 +117,10 @@ set ttyfast " Faster scrolling (not sure if it works?)
 set backupdir=~/.cache/vim "Directory for backup files
 set hidden " When moving to new file, keep old one in buffer
 
-color dracula
+" colorscheme nightfox
+" colorscheme tokyonight
+colorscheme dracula
+" colorscheme solarized
 
 " Plugin set up
 lua << EOF
@@ -152,7 +158,7 @@ xmap        s   <Plug>(vsnip-select-text)
 nmap        S   <Plug>(vsnip-cut-text)
 xmap        S   <Plug>(vsnip-cut-text)
 
-" terminal utils, window jumping
+" pane jumping, resizing
 tnoremap <A-h> <C-\><C-N><C-w>h
 tnoremap <A-j> <C-\><C-N><C-w>j
 tnoremap <A-k> <C-\><C-N><C-w>k
@@ -165,7 +171,6 @@ tnoremap <A-+> <C-\><C-N><C-w>+
 tnoremap <A--> <C-\><C-N><C-w>-
 tnoremap <A-<> <C-\><C-N><C-w><
 tnoremap <A->> <C-\><C-N><C-w>>
-tnoremap <Esc> <C-\><C-n>
 inoremap <A-h> <C-\><C-N><C-w>h
 inoremap <A-j> <C-\><C-N><C-w>j
 inoremap <A-k> <C-\><C-N><C-w>k
@@ -190,6 +195,10 @@ nnoremap <A-+> <C-w>+
 nnoremap <A--> <C-w>-
 nnoremap <A->> <C-w>>
 nnoremap <A-<> <C-w><
+" exit term
+tnoremap <A-\> <C-\><C-n>
+inoremap <A-\> <C-\><C-n>
+
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
