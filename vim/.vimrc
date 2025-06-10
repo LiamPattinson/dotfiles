@@ -117,3 +117,4 @@ au BufRead,BufNewFile *.cpp.in,*.hpp.in,*.cxx.in,*.hxx.in,*.H.in,*C.in :setlocal
 
 " pFUnit test files
 au BufNewFile,BufRead *.pf   :setlocal filetype=fortran
+

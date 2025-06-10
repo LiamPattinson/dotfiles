@@ -1,80 +1,80 @@
+let g:python3_host_prog = $HOME . '~/.local/venv/nvim/bin/python'
+
 " Plugins. Use :PlugInstall to update
 call plug#begin()
-    " treesitter -- incremental highlighting updates
-    Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+  " treesitter -- incremental highlighting updates
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
-    " lspconfig -- set up Language Server Protocols
-    Plug 'neovim/nvim-lspconfig' " Easier LSP setup
+  " lspconfig -- set up Language Server Protocols
+  Plug 'neovim/nvim-lspconfig' " Easier LSP setup
 
-    " Autocompletion with nvim-cmp engine and vsnip snippets
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/cmp-path'
-    Plug 'hrsh7th/cmp-cmdline'
-    Plug 'hrsh7th/nvim-cmp'
-    Plug 'hrsh7th/cmp-vsnip'
-    Plug 'hrsh7th/vim-vsnip'
-    Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+  " Autocompletion with nvim-cmp engine and vsnip snippets
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 
-    " Additional snippets
-    Plug 'rafamadriz/friendly-snippets'
+  " Fuzzy file finder, better file browser
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
+  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+  Plug 'nvim-telescope/telescope-file-browser.nvim'
+  Plug 'nvim-tree/nvim-web-devicons'
 
-    " Fuzzy file finder, better file browser
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
-    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-    Plug 'nvim-telescope/telescope-file-browser.nvim'
-    Plug 'nvim-tree/nvim-web-devicons'
+  " Status line
+  Plug 'nvim-lualine/lualine.nvim'
 
-    " Status line
-    Plug 'nvim-lualine/lualine.nvim'
+  " Better terminal
+  Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
-    " Better terminal
-    Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+  " Better folding
+  " Try https://github.com/kevinhwang91/nvim-ufo sometime
 
-    " Better folding
-    " Try https://github.com/kevinhwang91/nvim-ufo sometime
+  " Git stuff
+  Plug 'tpope/vim-fugitive'
+  Plug 'mhinz/vim-signify'
 
-    " Git stuff
-    Plug 'tpope/vim-fugitive'
-    Plug 'mhinz/vim-signify'
+  " Auto-documenting
+  Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
-    " Auto-documenting
-    Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+  " Python stuff
+  Plug 'vim-scripts/indentpython.vim'
+  Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
 
-    " Python stuff
-    Plug 'psf/black', { 'branch': 'stable' }
+  " Indent line
+  Plug 'Yggdroot/indentLine'
 
-    " Indent line
-    Plug 'Yggdroot/indentLine'
+  " Show context of current indentation block
+  "Plug 'wellle/context.vim'
 
-    " Better commenting utils, uses gc plus movement (gcc to comment line)
-    Plug 'numToStr/Comment.nvim'
+  " Better commenting utils, uses gc plus movement (gcc to comment line)
+  Plug 'numToStr/Comment.nvim'
 
-    " Show the context of for loops, if statements etc
-    Plug 'wellle/context.vim'
+  " Better startup screen, session management (:SLoad, :SSave, :SDelete, :SClose)
+  Plug 'mhinz/vim-startify'
 
-    " Better startup screen, session management (:SLoad, :SSave, :SDelete, :SClose)
-    Plug 'mhinz/vim-startify'
+  " Themes
+  Plug 'dracula/vim'
+  Plug 'EdenEast/nightfox.nvim'
+  Plug 'folke/tokyonight.nvim'
+  Plug 'ishan9299/nvim-solarized-lua'
 
-    " Themes
-    Plug 'dracula/vim'
-    Plug 'EdenEast/nightfox.nvim'
-    Plug 'folke/tokyonight.nvim'
-    Plug 'ishan9299/nvim-solarized-lua'
+  " Hardmode. Git gud.
+  Plug 'takac/vim-hardtime'
 
-    " Hardmode. Git gud.
-    Plug 'takac/vim-hardtime'
+  " syntax highlighting
+  Plug 'cespare/vim-toml'
+  Plug 'rust-lang/rust.vim'
+  
+  " LaTeX
+  Plug 'lervag/vimtex'
 
-    " syntax highlighting
-    Plug 'cespare/vim-toml'
-    Plug 'rust-lang/rust.vim'
-    
-    " LaTeX
-    Plug 'vim-latex/vim-latex'
-
-    " Reasonable defaults
-    Plug 'tpope/vim-sensible'
+  " Reasonable defaults
+  Plug 'tpope/vim-sensible'
 
 call plug#end()
 
@@ -88,9 +88,9 @@ set ignorecase " Don't count upper vs lower case
 set smartcase " ... unless the search term contains upper case chars
 
 " Indentation
-set tabstop=4 " Number of columns occupied by a tab
-set softtabstop=4 " Interpret multiples spaces as tabs
-set shiftwidth=4 " Width of autoindents
+set tabstop=2 " Number of columns occupied by a tab
+set softtabstop=2 " Interpret multiples spaces as tabs
+set shiftwidth=2 " Width of autoindents
 set expandtab " Automatically convert tabs to spaces
 set smarttab " Cleverer tabbing/spacing
 set autoindent " Automatically indent based on last line
@@ -105,6 +105,9 @@ set ruler " Info of char positions on current line
 set wildmode=longest,list,full " bash style tab autocomplete
 set wildmenu " Give menu of possible autocompletes
 
+" auto-completion menu
+set completeopt=menu,menuone,noselect,noinsert
+
 " Misc
 set wrap " Long lines wrap backup
 set breakindent " Keep indentation when wrapping long lines
@@ -116,6 +119,8 @@ set mouse=a " Enable mouse clicking
 set ttyfast " Faster scrolling (not sure if it works?)
 set backupdir=~/.cache/vim "Directory for backup files
 set hidden " When moving to new file, keep old one in buffer
+set list " Show invisible chars like tabs, newlines, etc
+set listchars=tab:▸·,trail:·
 
 " colorscheme nightfox
 " colorscheme tokyonight
@@ -125,7 +130,9 @@ colorscheme dracula
 " Plugin set up
 lua << EOF
 servers = {
-    'pyright',
+  'pyright',
+  'texlab',
+  'fortls',
 }
 require('treesitter-config')
 require('nvim-cmp-config')
@@ -158,6 +165,7 @@ xmap        s   <Plug>(vsnip-select-text)
 nmap        S   <Plug>(vsnip-cut-text)
 xmap        S   <Plug>(vsnip-cut-text)
 
+
 " pane jumping, resizing
 tnoremap <A-h> <C-\><C-N><C-w>h
 tnoremap <A-j> <C-\><C-N><C-w>j
@@ -180,7 +188,7 @@ inoremap <A-J> <C-\><C-N><C-w>J
 inoremap <A-K> <C-\><C-N><C-w>K
 inoremap <A-L> <C-\><C-N><C-w>L
 inoremap <A-+> <C-\><C-N><C-w>+
-inoremap <A--> <C-\><C-N><C-w>-
+noremap <A--> <C-\><C-N><C-w>-
 inoremap <A-<> <C-\><C-N><C-w><
 inoremap <A->> <C-\><C-N><C-w>>
 nnoremap <A-h> <C-w>h
@@ -213,13 +221,15 @@ let g:hardtime_ignore_buffer_patterns = [ "vim.lsp" ]
 let g:hardtime_maxcount = 4
 let g:hardtime_motion_with_count_resets = 1
 
-" Default auto-documenting settings
+" Settings for Python 
 let g:doge_doc_standard_python = 'numpy'
+autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4
 
 " Settings for LaTeX, markdown, rst, etc
 let g:tex_flavor = "latex"
-autocmd FileType tex,latex,rst,markdown setlocal tw=88
+let g:vimtex_syntax_conceal_disable = 1
 autocmd FileType tex,latex,rst,markdown setlocal spell spelllang=en_gb tw=88
+autocmd FileType rst setlocal tabstop=3 softtabstop=3 shiftwidth=3
 
 " Settings for C/C++/Fortran
 autocmd FileType c,cpp,cmake,fortran setlocal tabstop=2 softtabstop=2 shiftwidth=2
@@ -235,3 +245,6 @@ nnoremap ZQ <Nop>
 filetype plugin indent on
 syntax on
 
+command! RuffFix execute ':%! ruff check --select=I,E501 --fix-only --silent --stdin-filename=%'
+command! FortitudeFix execute ':%! fortitude check --fix-only --quiet --stdin-filename=%'
+command! FortitudeFixUnsafe execute ':%! fortitude check --fix-only --unsafe-fixes --quiet --stdin-filename=%'

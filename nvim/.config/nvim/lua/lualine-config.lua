@@ -12,8 +12,8 @@ require('lualine').setup {
         lualine_a = {'mode'},
         lualine_b = {'branch', 'diff', 'diagnostics'},
         lualine_c = {'filename'},
-        lualine_x = {'encoding', 'fileformat'},
-        lualine_y = {'filetype'},
+        lualine_x = {'progress', 'location'},
+        lualine_y = {'filetype', 'encoding', 'fileformat'},
         lualine_z = {{'os.date("%-I:%M %p")', color = {gui='NONE'}}}
     },
     inactive_sections = {

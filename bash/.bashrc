@@ -5,7 +5,7 @@
 
 # Load local settings
 if [[ -f $HOME/.bash_local ]]; then
-    source $HOME/.bash_local
+  source $HOME/.bash_local
 fi
 
 # Command prompt
@@ -15,34 +15,47 @@ PS1='[\t \u@\h \w]\$ '
 # Doesn't apply in zsh
 set -o vi
 
-# Running urxvt? If so, make sure TERM is set correctly
-if [[ ! -z "$COLORTERM" ]]; then # -z tests empty string. Preferable to -v for compatibility.
-    export TERM=xterm-256color
-    # handle urxvt pink bug -- may require loading twice
-    [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
-fi
-
 # Ignore Ctrl-d as a shell-killer
 set -o ignoreeof
 
-# User defined aliases
+# Handy aliases
 alias ls='ls --color=auto'
 alias l='ls --color=auto -lha --group-directories-first'
 alias tmux='tmux -2'
 
-# nvim over vim
+# Prefer nvim
 if [[ -f /usr/bin/nvim ]]; then
-    alias vim=nvim
+  alias vim=nvim
+  EDITOR=nvim
+else
+  EDITOR=vim
 fi
 
 # Path edits
 if [[ -d /opt/anaconda ]]; then
-    PATH="$PATH:/opt/anaconda/bin"
+  PATH="$PATH:/opt/anaconda/bin"
 fi
+
+PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$HOME/.cargo/bin"
 
 # SSH keychain
 eval $(keychain --eval --quiet --nogui --noask id_rsa)
 
-# Environment Variables
-COLOUR_BLUE_RGB="38,139,210"
-COLOUR_BLUE_HEX="268bd2"
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/ltp511/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/ltp511/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/ltp511/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="$PATH:/home/ltp511/miniconda3/bin"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+. "$HOME/.cargo/env"
+

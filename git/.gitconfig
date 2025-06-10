@@ -1,7 +1,7 @@
 [user]
 	name = Liam Pattinson
 	email = liampattinson@gmail.com
-[core]
-	editor = vim
 [credential]
 	helper = cache
+[core]
+	excludesfile = ~/.gitignore
