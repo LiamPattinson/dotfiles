@@ -40,3 +40,43 @@ Zsh should be the preferred shell, but we need this as a foundation.
 It contains only a minimal `.bashrc` file, but an optional `.bash_local`
 file may be created within the home directory to add any machine-specific
 setup. To install, simply run `stow bash`.
+
+Features like `historyappend` will not be set here, as they'll interfere
+with the Zsh set up later.
+
+### `zsh`
+
+First install Zsh using your distro package manager.
+
+We'll need to install oh-my-zsh next:
+
+```bash
+# Check the official site first to see if this has changed
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+This will install a default `.zshrc`, which you should keep in place
+for now.
+
+Next, install nerd fonts:
+
+```bash
+mkdir -p ~/Workspace
+cd ~/Workspace
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts
+cd nerd-fonts
+chmod u+x install.sh
+./install.sh RobotoMono  # Or something else...
+```
+
+Then go into your terminal settings, set your default font to the new Nerd
+Font, and re-open the terminal.
+
+You can then remove the default `.zshrc`, `stow zsh`, and go through the inital
+setup by running `zsh`.
+
+Finally, change your default shell:
+
+```bash
+chsh -s $(which zsh)  # Log-out so this will take effect!
+```

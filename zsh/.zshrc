@@ -53,8 +53,6 @@ antigen bundle gitfast # Autocompletion for git
 antigen bundle history-substring-search # Search history with incomplete command
 antigen bundle heroku  # Better autocomplete
 antigen bundle pip # PyPI autocomplete
-antigen bundle python # Python aliases (mkv for making venv, vrun for activating)
-antigen bundle tmux # Automatically set correct tmux settings
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
