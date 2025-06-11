@@ -1,4 +1,4 @@
-# dotfiles of @LiamPattinson
+ dotfiles of @LiamPattinson
 
 A collection of my personal settings files.
 
@@ -33,6 +33,11 @@ steps in order:
 ### `git`
 
 This one is really easy -- simply `stow git` and you're done.
+
+### `vim`
+
+Again, just `stow vim` and you're done. We'll prefer Neovim for
+almost everything, so this is just a minimal set up.
 
 ### `bash`
 
@@ -80,3 +85,26 @@ Finally, change your default shell:
 ```bash
 chsh -s $(which zsh)  # Log-out so this will take effect!
 ```
+
+### Neovim
+
+Install the following:
+
+```bash
+sudo apt install ripgrep fd-find
+```
+
+As the Ubuntu version of Neovim is hopelessly outdated,
+ou'll then need to install a pre-built binary for your system
+from the latest releases:
+
+```bash
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+sudo rm -rf /opt/nvim
+sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+rm nvim-linux-x86_64.tar.gz
+```
+
+## License
+
+This repo is licensed under the MIT License.

@@ -40,7 +40,8 @@ fi
 PS1="${GREEN}\u@\h:${BLUE}\w ${DEFAULT}\$ "
 
 # Prefer nvim
-if [[ -f /usr/bin/nvim ]]; then
+if [[ -f /opt/nvim-linux-x86_64/bin/nvim ]]; then
+  PATH="$PATH:/opt/nvim-linux-x86_64/bin"
   alias vim=nvim
   EDITOR=nvim
 else
