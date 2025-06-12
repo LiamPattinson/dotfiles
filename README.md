@@ -1,4 +1,4 @@
- dotfiles of @LiamPattinson
+# Dotfiles of @LiamPattinson
 
 A collection of my personal settings files.
 
@@ -30,26 +30,26 @@ As a prerequisite, you should have your SSH keys set up with
 GitHub. You should then proceed to set up the following
 steps in order:
 
-### `git`
+### Git
 
 This one is really easy -- simply `stow git` and you're done.
 
-### `vim`
+### Vim
 
 Again, just `stow vim` and you're done. We'll prefer Neovim for
 almost everything, so this is just a minimal set up.
 
-### `bash`
+### Bash
 
 Zsh should be the preferred shell, but we need this as a foundation.
 It contains only a minimal `.bashrc` file, but an optional `.bash_local`
 file may be created within the home directory to add any machine-specific
 setup. To install, simply run `stow bash`.
 
-Features like `historyappend` will not be set here, as they'll interfere
+Options like `APPEND_HISTORY` will not be set here, as they'll interfere
 with the Zsh set up later.
 
-### `zsh`
+### Zsh
 
 First install Zsh using your distro package manager.
 
