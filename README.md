@@ -126,6 +126,10 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
+- Install Node.js. In lieu of Ubuntu's packaged version, go to the 
+  [node website](https://nodejs.org/en/download) and follow the instructions there.
+
+
 ## License
 
 This repo is licensed under the MIT License. It includes a fork of
