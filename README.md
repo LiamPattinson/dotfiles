@@ -110,6 +110,21 @@ The Neovim configuration can be found in my fork of
 included in the top-level of this repo as a submodule. The
 `nvim` directory simply contains a sym-link to that submodule.
 
+## Additional Setup
+
+- Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/), which
+  should be preferred over standard tools for Python development:
+
+```bash
+# Double-check the website to ensure this is still correct
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+- Install Rust:
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
 
 ## License
 
