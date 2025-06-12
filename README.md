@@ -7,11 +7,12 @@ A collection of my personal settings files.
 Relies on the tool `stow` to manage home directory symlinks.
 This can be installed using `apt`.
 
-First, clone this repo into your home directory:
+First, clone this repo into your home directory, being sure to
+include submodules:
 
 ```bash
 cd $HOME
-git clone git@github.com:LiamPattinson/dotfiles
+git clone --recursive git@github.com:LiamPattinson/dotfiles
 ```
 
 To install a set of dotfiles for `git`, perform the commands:
@@ -94,9 +95,8 @@ Install the following:
 sudo apt install ripgrep fd-find
 ```
 
-As the Ubuntu version of Neovim is hopelessly outdated,
-ou'll then need to install a pre-built binary for your system
-from the latest releases:
+As the Ubuntu version of Neovim is hopelessly outdated, we'll then need to
+install a pre-built binary for your system from the latest releases:
 
 ```bash
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
@@ -105,6 +105,14 @@ sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
 rm nvim-linux-x86_64.tar.gz
 ```
 
+The Neovim configuration can be found in my fork of
+[kickstart.nvim](https://github.com/LiamPattinson/kickstart.nvim), which is
+included in the top-level of this repo as a submodule. The
+`nvim` directory simply contains a sym-link to that submodule.
+
+
 ## License
 
-This repo is licensed under the MIT License.
+This repo is licensed under the MIT License. It includes a fork of
+[kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), which is also
+licensed under MIT.
