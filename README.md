@@ -115,6 +115,14 @@ simply contains a sym-link to that submodule.
 After running `stow nvim`, all plugins will be installed the next time `nvim`
 is opened.
 
+Currently, the Neovim set up includes only minimal changes from the
+kickstart.nvim defaults. I previously ran a setup that included LSP plugins and
+more custom key-bindings, but I found it far too difficult to maintain and
+could never remember how to use all of the features I'd installed. Since moving
+to VSCode as my core 'heavy duty' editor, I've relegated Neovim to being a
+convenience editor for smaller jobs. I may return to this at some point to
+reintroduce Python/Rust LSPs if I can find the time.
+
 ## Additional Setup
 
 - Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/), which
