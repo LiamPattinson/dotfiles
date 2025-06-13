@@ -4,11 +4,15 @@ A collection of my personal settings files.
 
 ## Usage
 
-Relies on the tool `stow` to manage home directory symlinks.
-This can be installed using `apt`.
+Relies on the tool `stow` to manage home directory symlinks.  This can be
+installed using `apt`:
 
-First, clone this repo into your home directory, being sure to
-include submodules:
+```bash
+sudo apt install stow
+```
+
+First, clone this repo into your home directory, being sure to include
+submodules:
 
 ```bash
 cd $HOME
@@ -22,14 +26,13 @@ cd ~/dotfiles
 stow git
 ```
 
-This will create a symlink at `~/.gitconfig` that points to the
-file `~/dotfiles/git/.gitconfig`.
+This will create a symlink at `~/.gitconfig` that points to the file
+`~/dotfiles/git/.gitconfig`.
 
 ## Detailed Instructions
 
-As a prerequisite, you should have your SSH keys set up with
-GitHub. You should then proceed to set up the following
-steps in order:
+As a prerequisite, you should have your SSH keys set up with GitHub. You should
+then proceed through the following steps in order:
 
 ### Git
 
@@ -37,18 +40,18 @@ This one is really easy -- simply `stow git` and you're done.
 
 ### Vim
 
-Again, just `stow vim` and you're done. We'll prefer Neovim for
-almost everything, so this is just a minimal set up.
+Again, just `stow vim` and you're done. We'll prefer Neovim for almost
+everything, so this is just a minimal set up.
 
 ### Bash
 
-Zsh should be the preferred shell, but we need this as a foundation.
-It contains only a minimal `.bashrc` file, but an optional `.bash_local`
-file may be created within the home directory to add any machine-specific
-setup. To install, simply run `stow bash`.
+Zsh should be the preferred shell, but we need this as a foundation.  It
+contains only a minimal `.bashrc` file, but an optional `.bash_local` file may
+be created within the home directory to add any machine-specific setup. To
+install, simply run `stow bash`.
 
-Options like `APPEND_HISTORY` will not be set here, as they'll interfere
-with the Zsh set up later.
+Options like `APPEND_HISTORY` will not be set here, as they'll interfere with
+the Zsh set up later.
 
 ### Zsh
 
@@ -61,8 +64,7 @@ We'll need to install oh-my-zsh next:
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-This will install a default `.zshrc`, which you should keep in place
-for now.
+This will install a default `.zshrc`, which you should keep in place for now.
 
 Next, install nerd fonts:
 
@@ -107,8 +109,11 @@ rm nvim-linux-x86_64.tar.gz
 
 The Neovim configuration can be found in my fork of
 [kickstart.nvim](https://github.com/LiamPattinson/kickstart.nvim), which is
-included in the top-level of this repo as a submodule. The
-`nvim` directory simply contains a sym-link to that submodule.
+included in the top-level of this repo as a submodule. The `nvim` directory
+simply contains a sym-link to that submodule.
+
+After running `stow nvim`, all plugins will be installed the next time `nvim`
+is opened.
 
 ## Additional Setup
 
