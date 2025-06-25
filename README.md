@@ -97,6 +97,12 @@ Install the following:
 sudo apt install ripgrep fd-find
 ```
 
+You should also install Rust (see below), and then:
+
+```bash
+cargo install tree-sitter-cli
+```
+
 As the Ubuntu version of Neovim is hopelessly outdated, we'll then need to
 install a pre-built binary for your system from the latest releases:
 
